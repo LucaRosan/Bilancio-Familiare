@@ -8,26 +8,26 @@
 <body>
   <div class="container mt-5">
     <h2 class="mb-4">Registra una nuova operazione finanziaria</h2>
-    <form action="/" method="POST">
+    <form th:object="${operazioniFinanziarie}" method="POST">
       
       <div class="mb-3">
         <label for="data" class="form-label">Data</label>
-        <input type="date" class="form-control" id="data" name="data" required>
+        <input type="date" th:field="*{dataOperazione}" class="form-control" id="data" required>
       </div>
 
       <div class="mb-3">
         <label for="descrizione" class="form-label">Descrizione</label>
-        <input type="text" class="form-control" id="descrizione" name="descrizione" required>
+        <input type="text" th:field="*{descrizione}" class="form-control" id="descrizione" required>
       </div>
 
       <div class="mb-3">
         <label for="importo" class="form-label">Importo (€)</label>
-        <input type="number" class="form-control" id="importo" name="importo" required>
+        <input type="number" th:field="*{importo}" class="form-control" id="importo" min="0" required>
       </div>
 
       <div class="mb-3">
         <label for="tipo" class="form-label">Tipo di operazione</label>
-        <select class="form-select" id="tipo" name="tipo" required>
+        <select class="form-select" id="tipo" th:field="*{tipoMovimento}" required>
           <option value="ENTRATA">Entrata</option>
           <option value="USCITA">Uscita</option>
         </select>
