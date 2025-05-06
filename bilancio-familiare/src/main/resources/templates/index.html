@@ -8,21 +8,25 @@
 <body>
   <div class="container mt-5">
     <h2 class="mb-4">Registra una nuova operazione finanziaria</h2>
+    <h3 th:if="${esito != null}" th:text="esito"></h3>
     <form th:object="${operazioniFinanziarie}" method="POST">
       
       <div class="mb-3">
         <label for="data" class="form-label">Data</label>
         <input type="date" th:field="*{dataOperazione}" class="form-control" id="data" required>
+        <small class="text-danger" th:if="${#fields.hasErrors('dataOperazione')}" th:errors="*{dataOperazione}"></small>
       </div>
 
       <div class="mb-3">
         <label for="descrizione" class="form-label">Descrizione</label>
         <input type="text" th:field="*{descrizione}" class="form-control" id="descrizione" required>
+        <small class="text-danger" th:if="${#fields.hasErrors('descrizione')}" th:errors="*{descrizione}"></small>
       </div>
 
       <div class="mb-3">
         <label for="importo" class="form-label">Importo (€)</label>
-        <input type="number" th:field="*{importo}" class="form-control" id="importo" min="0" required>
+        <input type="number" step="0.01" min="0.01" th:field="*{importo}" class="form-control" id="importo" required>
+        <small class="text-danger" th:if="${#fields.hasErrors('importo')}" th:errors="*{importo}"></small>
       </div>
 
       <div class="mb-3">
@@ -35,6 +39,7 @@
 
       <button type="submit" class="btn btn-primary">Salva operazione</button>
     </form>
+    <a th:href="@{/elenco}">Vai all'elenco completo</a>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
